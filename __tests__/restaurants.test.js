@@ -55,6 +55,35 @@ describe('Restaurant routes', () => {
   it('GET api/v1/restaurants/:restaurantId should return the restaurant with nested reviews', async () => {
     const resp = await request(app).get('/api/v1/restaurants/1');
     expect(resp.status).toBe(200);
-    expect(resp.body).toMatchInlineSnapshot();
+    expect(resp.body).toMatchInlineSnapshot(`
+      Object {
+        "cost": 1,
+        "cuisine": "American",
+        "id": "1",
+        "image": "https://media-cdn.tripadvisor.com/media/photo-o/05/dd/53/67/an-assortment-of-donuts.jpg",
+        "name": "Pip's Original",
+        "reviews": Array [
+          Object {
+            "detail": "Best restaurant ever!",
+            "id": "1",
+            "stars": 5,
+            "userId": "1",
+          },
+          Object {
+            "detail": "Terrible service :(",
+            "id": "2",
+            "stars": 1,
+            "userId": "2",
+          },
+          Object {
+            "detail": "It was fine.",
+            "id": "3",
+            "stars": 4,
+            "userId": "3",
+          },
+        ],
+        "website": "http://www.PipsOriginal.com",
+      }
+    `);
   });
 });
