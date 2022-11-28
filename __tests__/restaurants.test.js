@@ -51,4 +51,10 @@ describe('Restaurant routes', () => {
       ]
     `);
   });
+
+  it('GET api/v1/restaurants/:restaurantId should return the restaurant with nested reviews', async () => {
+    const resp = await request(app).get('/api/v1/restaurants/1');
+    expect(resp.status).toBe(200);
+    expect(resp.body).toMatchInlineSnapshot();
+  });
 });
