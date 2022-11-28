@@ -111,4 +111,13 @@ describe('Restaurant routes', () => {
       }
     `);
   });
+
+  it('POST /api/v1/restaurants/:restaurantId/reviews should create a new review when logged in', async () => {
+    const [agent] = await registerAndLogin();
+    const resp = await agent
+      .post('/api/v1/restaurants/3/reviews')
+      .send({ stars: 5, detail: 'Best restaurant in town!' });
+    expect(resp.status).toBe(200);
+    expect(resp.body).toMatchInlineSnapshot();
+  });
 });
