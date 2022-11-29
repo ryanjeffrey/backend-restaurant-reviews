@@ -131,4 +131,11 @@ describe('Restaurant routes', () => {
       }
     `);
   });
+
+  it('POST /api/v1/restaurants/:restaurantId/reviews should return a 401 if not authenticated', async () => {
+    const resp = await request(app)
+      .post('/api/v1/restaurants/1/reviews')
+      .send({ stars: 3, detail: 'this should NOT save' });
+    expect(resp.status).toBe(401);
+  });
 });
