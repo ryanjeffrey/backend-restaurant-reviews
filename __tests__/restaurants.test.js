@@ -91,18 +91,21 @@ describe('Restaurant routes', () => {
           Object {
             "detail": "Best restaurant ever!",
             "id": "1",
+            "restaurantId": "1",
             "stars": 5,
             "userId": "1",
           },
           Object {
             "detail": "Terrible service :(",
             "id": "2",
+            "restaurantId": "1",
             "stars": 1,
             "userId": "2",
           },
           Object {
             "detail": "It was fine.",
             "id": "3",
+            "restaurantId": "1",
             "stars": 4,
             "userId": "3",
           },
@@ -118,6 +121,14 @@ describe('Restaurant routes', () => {
       .post('/api/v1/restaurants/3/reviews')
       .send({ stars: 5, detail: 'Best restaurant in town!' });
     expect(resp.status).toBe(200);
-    expect(resp.body).toMatchInlineSnapshot();
+    expect(resp.body).toMatchInlineSnapshot(`
+      Object {
+        "detail": "Best restaurant in town!",
+        "id": "4",
+        "restaurantId": "3",
+        "stars": 5,
+        "userId": "4",
+      }
+    `);
   });
 });
