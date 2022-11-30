@@ -138,4 +138,15 @@ describe('Restaurant routes', () => {
       .send({ stars: 3, detail: 'this should NOT save' });
     expect(resp.status).toBe(401);
   });
+
+  it('DELETE /api/v1/reviews/4 should delete comment #4', async () => {
+    const [agent] = await registerAndLogin();
+    const resp = await agent
+      .post('/api/v1/restaurants/3/reviews')
+      .send({ stars: 5, detail: 'Best restaurant in town!' });
+    expect(resp.status).toBe(200);
+
+    const deleteResp = await agent.delete('/api/v1/reviews/4');
+    expect(deleteResp.status).toBe(204);
+  });
 });
